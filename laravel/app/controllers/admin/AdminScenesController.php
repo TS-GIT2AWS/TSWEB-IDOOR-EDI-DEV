@@ -152,7 +152,7 @@ class AdminScenesController extends AdminController {
         return View::make('admin/scenes/edit', compact('scene', 'title'));
     }
 	
-/**
+	/**
      * Update the specified scene in storage.
      *
      * @param $scene

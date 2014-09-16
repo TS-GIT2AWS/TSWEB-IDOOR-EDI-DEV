@@ -40,7 +40,7 @@ class UserDatabaseRoles extends Migration {
         	$table->string('value');
         	$table->string('period');
         	$table->dateTime('started_at');
-        	$table->dateTime('end_at');
+        	$table->dateTime('ended_at');
         	$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         	$table->timestamps();
         });
@@ -50,10 +50,10 @@ class UserDatabaseRoles extends Migration {
         {
         	$table->engine = 'InnoDB';
         	$table->increments('id');
-        	$table->integer('role_id')->unsigned()->index();
+        	$table->integer('plan_id')->unsigned()->index();
         	$table->integer('user_id')->unsigned()->index();
         	$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        	$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+        	$table->foreign('plan_id')->references('id')->on('subscription_plans')->onDelete('cascade');
         	$table->timestamps();
         });
         

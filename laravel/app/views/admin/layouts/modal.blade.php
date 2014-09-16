@@ -166,7 +166,7 @@
         <!-- Our main JS file -->
         <script src="{{asset('assets/mini-upload-form/assets/js/script.js') }}"></script>
         
-        <!-- ./ Javascripts for upload form  --!> 
+        <!-- ./ Javascripts for upload form  --> 
     
 
  <script type="text/javascript">

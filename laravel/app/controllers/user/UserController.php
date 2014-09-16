@@ -42,8 +42,12 @@ class UserController extends BaseController {
         list($user,$redirect) = $this->user->checkAuthAndRedirect('user');
         if($redirect){return $redirect;}
 
+
+        
         // Show the page
         return View::make('site/user/index', compact('user'));
+        
+        //return View::make('site/user/index', compact('user', 'title'));
     }
 
     /**
@@ -193,7 +197,7 @@ class UserController extends BaseController {
         // Check that the user is confirmed.
         if ( Confide::logAttempt( $input, true ) )
         {
-            return Redirect::intended('/admin');
+            return Redirect::intended('/editor'); //if "editor" logged in, redirect to the page
         }
         else
         {

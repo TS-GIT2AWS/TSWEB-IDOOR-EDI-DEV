@@ -10,19 +10,13 @@ class Canvas extends Eloquent {
      * @return User
      */
     public function owner() {
-        return $this->belongsTo('User', 'user_id');
+        //return $this->belongsTo('EditorInformation', 'id');
+        return $this->belongsTo('EditorInformation');
     }
 
-    /**
-    * Save the canvas
-    *
-    *
-    */
-    /*public function save()
-    {
-	
-    }*/
-
+    
+    //========================================================================================
+    
     /**
      * Get the date the post was created.
      *

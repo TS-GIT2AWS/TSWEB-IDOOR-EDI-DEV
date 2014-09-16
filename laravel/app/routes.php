@@ -11,8 +11,6 @@
 |
 */
 
-#Route::get('/', array('as' => 'hello', 'uses' => 'HomeController@home'));
-
 /** ------------------------------------------
  *  Route model binding
  *  ------------------------------------------
@@ -23,6 +21,8 @@ Route::model('post', 'Post');
 Route::model('role', 'Role');
 
 Route::model('canvas', 'Canvas');
+Route::model('editorinformation', 'EditorInformation');
+
 Route::model('scene', 'Scene');
 Route::model('resource', 'Resource');
 
@@ -92,11 +92,64 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     #Route::controller('/', 'EditorDashboardController');
 });
 
+/** ------------------------------------------
+ *  Editor Routes
+ *  ------------------------------------------
+ */
+
+Route::group(array('prefix' => 'editor', 'before' => 'auth'), function()
+{
+	/*
+	Route::get('canvas', function()
+	{
+		
+		$user_id =3;
+		
+		$u = EditorInformation::whereId(1)->first();
+		echo $u->email.'<br>';
+		dd ($u);
+		
+		//foreach($u->user_canvas as $can){
+			///echo $can->canvas_name.'<br>';
+			//echo $painting->body.'<br><br>';
+		//}
+		
+		$media = media::whereId(1)->first();
+		echo $media->media_name.'<br>';
+		
+		$canvas = canvas::whereId(1)->first();
+		echo $canvas->canvas_name.'<br>';
+		
+		$user = user::whereId($user_id)->first();
+
+	});
+	*/
+
+	# Scene Management
+	Route::get('canvas/{canvas}/show', 'EditorCanvasController@getShow');
+    Route::get('canvas/{canvas}/edit', 'EditorCanvasController@getEdit');
+    Route::post('canvas/{canvas}/edit', 'EditorCanvasController@postEdit');
+    Route::get('canvas/{canvas}/delete', 'EditorCanvasController@getDelete');
+    Route::post('canvas/{canvas}/delete', 'EditorCanvasController@postDelete');
+
+    Route::post('canvas/{canvas}/upload', 'EditorCanvasController@postUpload');
+    Route::get('canvas/{canvas}/upload', 'EditorCanvasController@getUpload'); // TO-DO
+    Route::controller('canvas', 'EditorCanvasController');
+
+    # Admin Dashboard
+    #Route::controller('/', 'AdminDashboardController');
+
+    #Editor Dashboard
+    Route::controller('/', 'EditorDashboardController');
+});
+
 
 /** ------------------------------------------
  *  Frontend Routes
  *  ------------------------------------------
  */
+
+//:: User Routes ::
 
 // User reset routes
 Route::get('user/reset/{token}', 'UserController@getReset');
@@ -110,6 +163,9 @@ Route::post('user/login', 'UserController@postLogin');
 
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
+
+//:: ---User Routes--- ::
+
 
 //:: Application Routes ::
 
@@ -132,5 +188,11 @@ Route::get('/', array('before' => 'detectLang','uses' => 'HomeController@getInde
 
 # For detecting language
 Route::when('*','detectLang');
+
+
+Event::Listen('laravel.query', function($sql) {
+	 var_dump($sql);
+
+});
 
 

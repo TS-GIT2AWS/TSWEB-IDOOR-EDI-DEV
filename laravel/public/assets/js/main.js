@@ -7,11 +7,14 @@ $(document).ready(function() {
 
     };
     var u = new UnityObject2(config);
+    
 
     var $missingScreen = $("#unityPlayer").find(".missing");
     var $brokenScreen = $("#unityPlayer").find(".broken");
     $missingScreen.hide();
     $brokenScreen.hide();
+    
+   // $("#canvas").removeClass("dataTable");
 
     u.observeProgress(function(progress) {
         switch (progress.pluginStatus) {

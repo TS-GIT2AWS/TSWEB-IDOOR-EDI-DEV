@@ -80,6 +80,12 @@ Entrust::routeNeedsPermission( 'admin/comments*', 'manage_comments', Redirect::t
 Entrust::routeNeedsPermission( 'admin/users*', 'manage_users', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/roles*', 'manage_roles', Redirect::to('/admin') );
 
+// Check for role on all editor routes
+Entrust::routeNeedsRole( 'editor*', array('editor'), Redirect::to('/') );
+
+// Check for permissions on editor actions
+//TODO 
+
 /*
 |--------------------------------------------------------------------------
 | CSRF Protection Filter

@@ -22,6 +22,8 @@
         <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
 
+    
+
 		<style>
         body {
             padding: 60px 0;
@@ -66,6 +68,10 @@
 
                     <ul class="nav navbar-nav pull-right">
                         @if (Auth::check())
+                        
+                        @if (Auth::user()->hasRole('editor'))
+                        <li><a href="{{{ URL::to('editor') }}}">Editor Panel</a></li>
+                        @endif
                         
                         @if (Auth::user()->hasRole('admin'))
                         <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
@@ -112,6 +118,7 @@
 		================================================== -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+
 
         @yield('scripts')
 	</body>

@@ -16,15 +16,65 @@ body {
 
 {{-- Content --}}
 @section('content')
-<div class="page-header">
-	<h3>Edit your settings</h3>
+
+
+<div class="row">
+  <div class="col-sm-3">
+    <div class="sidebar-nav">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="visible-xs navbar-brand">Sidebar menu</span>
+        </div>
+        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+        
+		  <!-- Tabs -->
+          <ul class="nav navbar-nav nav-tabs">
+            <li class="active"><a href="#tab-profile" data-toggle="tab"> Profile Account </a></li>
+            <li><a href="#"></a></li>
+            @if (Auth::user()->hasRole('editor'))      
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Editor Management <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#tab-editor" data-toggle="tab">Another action </a></li>
+                
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header </li>
+                <li><a href="#" data-toggle="tab">Separated link </a></li>
+              </ul>
+            </li>
+            @endif
+             @if (Auth::user()->hasRole('editor_merchant'))      
+            <li><a href="tab-merchant" data-toggle="tab">Merchant Management </a></li>
+            @endif
+            <li><a href="#tab7" data-toggle="tab">Reviews <span class="badge">1,118</span></a></li>
+          </ul><!-- ./ tabs -->
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
 </div>
+
+
+ 
+ 
+<!-- Tabs Content -->
+<div class="tab-content">
+	
+<!-- Profile tab -->
+<div class="tab-pane active" id="tab-profile">
+<div class="col-sm-9">
+<div class="navbar navbar-default" role="navigation">
+<h3 align="center">Edit your settings</h3>
 <form class="form-horizontal" method="post" action="{{ URL::to('user/' . $user->id . '/edit') }}"  autocomplete="off">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
     <!-- ./ csrf token -->
-    <!-- General tab -->
-    <div class="tab-pane active" id="tab-general">
+
         <!-- username -->
         <div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
             <label class="col-md-2 control-label" for="username">Username</label>
@@ -64,8 +114,7 @@ body {
             </div>
         </div>
         <!-- ./ password confirm -->
-    </div>
-    <!-- ./ general tab -->
+
 
     <!-- Form Actions -->
     <div class="form-group">
@@ -75,5 +124,47 @@ body {
     </div>
     <!-- ./ form actions -->
 </form>
-</form>
+</div>
+</div>
+</div>
+
+<!-- ./ profile tab -->
+
+<!-- Editor Management tab -->
+	        <div class="tab-pane" id="tab-editor">
+	        <div class="col-sm-9">
+	        <div class="navbar navbar-default" role="navigation">
+                <div class="form-group">
+                  	  <h3 align="center">Editor Management</h3>
+                  	  
+
+                 		TESTING
+                  	  
+                </div>
+	        </div>
+	        </div>
+			</div>
+<!-- ./ Editor Management tab -->
+
+<!-- Merchant Management tab -->
+	        <div class="tab-pane" id="tab-merchant">
+	        <div class="col-sm-9">
+	        <div class="navbar navbar-default" role="navigation">
+                <div class="form-group">
+                      <h3 align="center">Merchant Management</h3>
+                </div>
+	        </div>
+	        </div>
+			</div>
+<!-- ./ Merchant Management tab -->
+
+</div>
+</div>
+
+
+
+
+
+
+
 @stop

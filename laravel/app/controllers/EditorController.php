@@ -16,7 +16,7 @@ class EditorController extends BaseController {
      * Returns the Editor page.
      *
      * @return View
-     */
+    
     public function getIndex()
     {
     	// Show the page
@@ -24,5 +24,7 @@ class EditorController extends BaseController {
     	return View::make('editor/layout/index');
     
     }
+    
+     */
 
 }
