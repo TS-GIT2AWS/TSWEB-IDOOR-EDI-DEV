@@ -12,17 +12,6 @@ class UserDatabase extends Migration {
      */
     public function up()
     {
-    	
-    	// Creates countries table
-    	Schema::connection('user_mysql')->create('countries', function($table)
-    	{
-    		$table->engine = 'InnoDB';
-    		$table->increments('id');
-    		$table->string('country_name')->unique();
-    		$table->string('country_acronym');
-    		$table->timestamps('created_at');
-    	});
-    	
 
     	// Creates company table
     	Schema::connection('user_mysql')->create('companies', function($table)
@@ -32,8 +21,6 @@ class UserDatabase extends Migration {
     		$table->string('company_name')->unique();
     		$table->string('company_address');
     		$table->string('company_contact');
-    		$table->integer('country_id')->unsigned()->nullable();
-    		$table->foreign('country_id')->references('id')->on('countries');
     		$table->timestamps();
     	});
     	
@@ -45,7 +32,7 @@ class UserDatabase extends Migration {
             $table->integer('company_id')->unsigned()->nullable();
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->string('password')->unique();
+            $table->string('password');
             $table->string('confirmation_code');
             $table->string('remember_token')->nullable();
             $table->boolean('confirmed')->default(false);
@@ -79,10 +66,9 @@ class UserDatabase extends Migration {
      */
     public function down()
     {
-        Schema::drop('countries');
-        Schema::drop('companies');
-        Schema::drop('users');
         Schema::drop('password_reminders');
+        Schema::drop('users');
+        Schema::drop('companys');
         
         //drop foreign key
         //$table->dropForeign('users_company_id_foreign');

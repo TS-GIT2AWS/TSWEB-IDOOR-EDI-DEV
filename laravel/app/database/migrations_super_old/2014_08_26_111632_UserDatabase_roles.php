@@ -40,7 +40,7 @@ class UserDatabaseRoles extends Migration {
         	$table->string('value');
         	$table->string('period');
         	$table->dateTime('started_at');
-        	$table->dateTime('ended_at');
+        	$table->dateTime('end_at');
         	$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         	$table->timestamps();
         });
